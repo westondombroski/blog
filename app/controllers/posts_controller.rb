@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
     before_action :find_post, only: [:show, :edit, :update, :destroy]
-   
+    before_action :authenticate_user!, only: [:new, :edit, :destroy]
+    before_action :is_owner, only: [:edit, :destroy]
     def index
         @posts = Post.all.order("created_at DESC")
     end
@@ -13,7 +14,7 @@ class PostsController < ApplicationController
     end
 
     def create
-        @post = Post.new(post_params)
+        @post = current_user.posts.build(post_params)
         if @post.save
             redirect_to @post
         else
@@ -40,10 +41,16 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:title, :body)
+        params.require(:post).permit(:title, :body, :user_id)
     end
 
     def find_post
         @post = Post.find(params[:id])
+    end
+
+    def is_owner
+        unless current_user == @post.user
+            redirect_to @post
+        end
     end
 end

@@ -2,5 +2,6 @@
 - @posts.each do |post|
     .post
         %h1= link_to post.title, post
-
-%small= link_to "New", new_post_path
+        %small
+            %span -
+            = post.user.email
