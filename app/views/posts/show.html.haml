@@ -1,5 +1,7 @@
-%h1= @post.title
-%p= @post.body
-%small= link_to "Back", root_path
-%small= link_to "Edit", edit_post_path(@post)
-%small= link_to "Delete", @post, method: :delete, data: {confirm: "Are you Sure?"}
+.content
+    %h1= @post.title
+    %p= @post.body
+    %br
+    %small= link_to "Back", root_path
+    %small= link_to "Edit", edit_post_path(@post)
+    %small= link_to "Delete", @post, method: :delete, data: {confirm: "Are you Sure?"}
