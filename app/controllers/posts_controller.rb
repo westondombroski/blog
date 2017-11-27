@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     def create
         @post = current_user.posts.build(post_params)
         if @post.save
-            redirect_to @post
+            redirect_to @post, notice: "Post successfully created!"
         else
             render "new"
         end
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 
     def update
         if @post.update(post_params)
-            redirect_to @post
+            redirect_to @post, notice: "Post successfully updated!"
         else
             render "edit"
         end
@@ -35,13 +35,14 @@ class PostsController < ApplicationController
 
     def destroy
         @post.destroy
+        flash[:notice] = "Post successfully deleted!"
         redirect_to root_path
     end
 
     private
 
     def post_params
-        params.require(:post).permit(:title, :body, :user_id)
+        params.require(:post).permit(:title, :body, :user)
     end
 
     def find_post
@@ -50,6 +51,7 @@ class PostsController < ApplicationController
 
     def is_owner
         unless current_user == @post.user
+            flash[:alert] = "Sorry, that post belongs to someone else!"
             redirect_to @post
         end
     end
