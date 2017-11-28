@@ -1,5 +1,6 @@
 - @posts.each do |post|
     .post
+        = image_tag post.avatar(:medium)
         %h2= link_to post.title, post
         %small
             %span -

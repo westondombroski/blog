@@ -1,4 +1,5 @@
 .content
+    = image_tag @post.avatar(:medium)
     %h1= @post.title
     %p= @post.body
     %br

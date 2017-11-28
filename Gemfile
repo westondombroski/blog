@@ -10,6 +10,7 @@ gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'simple_form', '~> 3.5'
 gem 'devise'
 gem 'friendly_id', '~> 5.1.0'
+gem "paperclip", "~> 5.0.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.4'
