@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    before_action :find_post, only: [:show, :edit, :update, :destroy]
+    before_action :find_post, only: [:edit, :update, :destroy]
     before_action :authenticate_user!, only: [:new, :edit, :destroy]
     before_action :is_owner, only: [:edit, :destroy]
     def index
@@ -7,6 +7,7 @@ class PostsController < ApplicationController
     end
 
     def show
+        @post = Post.friendly.find(params[:id])
     end
 
     def new
