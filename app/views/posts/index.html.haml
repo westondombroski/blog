@@ -1,7 +1,6 @@
-%h1 Posts:
 - @posts.each do |post|
     .post
-        %h1= link_to post.title, post
+        %h2= link_to post.title, post
         %small
             %span -
             = post.user.email
