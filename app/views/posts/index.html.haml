@@ -1,7 +1,10 @@
+= will_paginate @posts
 - @posts.each do |post|
     .post
         = image_tag post.avatar(:medium)
         %h2= link_to post.title, post
+        %p= post.body.truncate(20)
         %small
             %span -
             = link_to post.user.email, post.user
+            = post.created_at.strftime('%m.%d.%y')
