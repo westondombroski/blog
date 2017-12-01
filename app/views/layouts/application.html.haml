@@ -1,21 +1,27 @@
 !!! 5
 %head
-  %title Simple Blog  
+  %title wd  
   = csrf_meta_tags
   = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
   = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
-%body
-  %nav.navbar.navbar-defualt
-    .container
-      .navbar-brand= link_to "Blog", root_path
-      %ul.nav.navbar-nav.navbar-right
+%body.bg
+  .container
+    .row
+      .col-md-4
         - if user_signed_in?
-          %li= link_to "New Post", new_post_path
-          %li= link_to "Sign out", destroy_user_session_path, method: :delete
+          = link_to "New Post", new_post_path
+          = link_to image_tag("headshot.png"), destroy_user_session_path, method: :delete
         - else
-          %li= link_to "Sign in", new_user_session_path
-          %li= link_to "Sign up", new_user_registration_path
+          = link_to image_tag("headshot.png"), new_user_session_path
+          = link_to "Sign up", new_user_registration_path
+      .col-md-4.text-center
+        = link_to image_tag("wd.png"), root_path     
+      .col-md-4.text-right
+        .post_search.form-group
+          = form_tag(posts_path, method: "get") do
+            = text_field_tag :search, nil, placeholder: "Search posts...", class: "form-control"
+            = submit_tag "", style: "display: none;"
 
   .container
     - flash.each do |name, msg|

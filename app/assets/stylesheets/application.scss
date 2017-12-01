@@ -14,15 +14,36 @@
  *= require_self
  */
 
- @import 'bootstrap-sprockets';
+@import 'bootstrap-sprockets';
 
- html, body {
+html, body {
      width: 100%;
      height: 100%;
      overflow: auto;
- }
+}
 
- //Navigation
- nav {
-     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
- }
+.bg {
+    background-color: 	#EFDECD;
+}
+
+//post with title over image
+.post { 
+    position: relative; 
+    width: 100%; /* for IE 6 */
+}
+ 
+.post-info { 
+    position: absolute; 
+    top: 50%; 
+    left: 5%; 
+    width: 100%; 
+}
+
+.post-date {
+    color: white;
+}
+
+img {
+    max-height: 50%;
+    max-width: 100%;
+}
