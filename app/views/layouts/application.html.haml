@@ -8,22 +8,24 @@
 %body.bg
   .container
     .row
-      .col-md-4
+      .col-4.text-center.head
         - if user_signed_in?
-          = link_to "New Post", new_post_path
-          = link_to image_tag("headshot.png"), destroy_user_session_path, method: :delete
+          .avatar
+            = link_to image_tag("headshot.png"), destroy_user_session_path, method: :delete
+            .plus
+              = link_to image_tag("plus.png"), new_post_path
         - else
           = link_to image_tag("headshot.png"), new_user_session_path
-          = link_to "Sign up", new_user_registration_path
-      .col-md-4.text-center
+      .col-4.text-center.head
         = link_to image_tag("wd.png"), root_path     
-      .col-md-4.text-right
-        .post_search.form-group
-          = form_tag(posts_path, method: "get") do
-            = text_field_tag :search, nil, placeholder: "Search posts...", class: "form-control"
-            = submit_tag "", style: "display: none;"
+      .col-4.text-center.head
+        = link_to image_tag("search.png"), new_user_session_path
+        -# .post_search.form-group
+        -#   = form_tag(posts_path, method: "get") do
+        -#     = text_field_tag :search, nil, placeholder: "Search posts...", class: "form-control"
+        -#     = submit_tag "", style: "display: none;"
 
-  .container
     - flash.each do |name, msg|
       = content_tag :div, msg, class: "alert alert-success" 
+  .container
     = yield

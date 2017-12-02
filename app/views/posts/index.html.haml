@@ -1,9 +1,21 @@
-- @posts.each do |post|
-    .post
-        = image_tag post.avatar
-        .post-info
-            %h3= link_to post.title, post
-            %small
-                .post-date
-                    = post.created_at.strftime('%m.%d.%y')
-= will_paginate @posts
+.container
+    - if @posts
+        - @posts.each do |post|
+            .post
+                .post-image
+                    = image_tag post.avatar
+                    .post-info
+                        %h3= link_to post.title, post
+                        %small
+                        .post-date
+                            = post.created_at.strftime('%m.%d.%y')
+            %br 
+            %br
+    - else 
+        %h2 Sorry, writer's block :-/
+.container
+    .row
+        .col-5
+        .col-4
+            .text-center
+                = will_paginate @posts
