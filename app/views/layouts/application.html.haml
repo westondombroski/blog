@@ -10,22 +10,22 @@
     .row
       .col-4.text-center.head
         - if user_signed_in?
-          .avatar
-            = link_to image_tag("headshot.png"), destroy_user_session_path, method: :delete
-            .plus
-              = link_to image_tag("plus.png"), new_post_path
+          = link_to image_tag("headshot.png"), destroy_user_session_path, method: :delete
         - else
-          = link_to image_tag("headshot.png"), new_user_session_path
+          = link_to image_tag("headshot.png"), new_user_session_path 
       .col-4.text-center.head
-        = link_to image_tag("wd.png"), root_path     
-      .col-4.text-center.head
-        = link_to image_tag("search.png"), new_user_session_path
-        -# .post_search.form-group
-        -#   = form_tag(posts_path, method: "get") do
-        -#     = text_field_tag :search, nil, placeholder: "Search posts...", class: "form-control"
-        -#     = submit_tag "", style: "display: none;"
-
-    - flash.each do |name, msg|
-      = content_tag :div, msg, class: "alert alert-success" 
+        = link_to image_tag("wd.png"), root_path, class: "logo"   
+      .col-4.search-form
+        = form_tag(posts_path, method: "get", class: "searchform") do
+          = text_field_tag :search, nil, class: "form-control search-control"
+          = submit_tag "", style: "display: none;"
+    .row.justify-content-center
+      .col-8
+        - flash.each do |name, msg|
+          = content_tag :div, msg, class: "alert alert-success" 
   .container
     = yield
+  - if user_signed_in?
+    .plus
+      = link_to image_tag("plus.png"), new_post_path
+  - else

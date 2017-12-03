@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :edit, :destroy]
     before_action :is_owner, only: [:edit, :destroy]
     def index
-        @posts = Post.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 2)
+        @posts = Post.where(["title LIKE ?", "%#{params[:search]}%"]).order("created_at DESC").paginate(:page => params[:page], :per_page => 2)
     end
 
     def show 
