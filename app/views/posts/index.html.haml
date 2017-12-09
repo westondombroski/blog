@@ -1,4 +1,4 @@
-.container
+.container.post-container
     - if @posts
         - @posts.each do |post|
             .post
@@ -9,9 +9,9 @@
                         %small
                         .post-date
                             = post.created_at.strftime('%m.%d.%y')
-            %br 
             %br
-    - else 
+            %br
+    - else
         %h2 Sorry, writer's block :-/
 .container
     .row

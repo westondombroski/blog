@@ -1,20 +1,35 @@
 !!! 5
 %head
-  %title wd  
+  %title wd
   = csrf_meta_tags
   = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
   = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
 %body.bg
+  %button.btn.btn-primary.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+    Launch demo modal
+
+  #myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#myModalLabel.modal-title Modal title
+        .modal-body
+          \...
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          %button.btn.btn-primary{:type => "button"} Save changes
   .container
     .row
-      .col-4.text-center.head
+      .col-4.text-center.head.headshot
         - if user_signed_in?
           = link_to image_tag("headshot.png"), destroy_user_session_path, method: :delete
         - else
-          = link_to image_tag("headshot.png"), new_user_session_path 
+          = link_to image_tag("headshot.png"), new_user_session_path
       .col-4.text-center.head
-        = link_to image_tag("wd.png"), root_path, class: "logo"   
+        = link_to image_tag("wd.png"), root_path, class: "logo"
       .col-4.search-form
         = form_tag(posts_path, method: "get", class: "searchform") do
           = text_field_tag :search, nil, class: "form-control search-control"
@@ -22,10 +37,11 @@
     .row.justify-content-center
       .col-8
         - flash.each do |name, msg|
-          = content_tag :div, msg, class: "alert alert-success" 
+          = content_tag :div, msg, class: "alert alert-success"
   .container
     = yield
-  - if user_signed_in?
-    .plus
-      = link_to image_tag("plus.png"), new_post_path
-  - else
+  .container-fluid
+    - if user_signed_in?
+      .plus
+        = link_to image_tag("plus.png"), new_post_path
+    - else
